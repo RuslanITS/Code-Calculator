@@ -1,0 +1,42 @@
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+
+interface AuthState {
+  pin: string,
+  isAuthorized: boolean,
+  message: string
+}
+
+const initialState: AuthState = {
+  pin: '',
+  isAuthorized: false,
+  message: ''
+};
+
+const authSlice = createSlice({
+  name: 'Auth',
+  initialState,
+  reducers: {
+
+    addDigit: (state, action: PayloadAction<string>) => {
+      state.pin += action.payload;
+    },
+
+    clearPin: (state) => {
+      state.pin = ''
+    },
+
+    checkPin: (state) => {
+      if (state.pin === '1234'){
+        state.isAuthorized = true;
+        state.message = "Access Granted";
+      }else {
+        state.isAuthorized = false;
+        state.message = "Access Denied";
+      }
+    }
+
+  }
+})
+
+export const { addDigit, clearPin, checkPin } = authSlice.actions;
+export default authSlice.reducer;

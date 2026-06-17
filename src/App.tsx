@@ -1,8 +1,8 @@
 import { Container } from "react-bootstrap";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home.tsx";
 import Footer from "./components/Footer/Footer.tsx";
 import Header from "./components/Header/Header.tsx";
+import Password from "./pages/PasswordPage/Password.tsx";
+import Calculator from "./pages/CalculatorPage/Calculator.tsx";
 import './App.css'
 
 const App = () => {
@@ -13,9 +13,10 @@ const App = () => {
 
       <main className="content">
         <Container className="py-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
+          {isAuthorized
+            ? <Calculator />
+            : <Password />
+          }
         </Container>
       </main>
       <Footer />
