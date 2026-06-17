@@ -18,20 +18,25 @@ const authSlice = createSlice({
   reducers: {
 
     addDigit: (state, action: PayloadAction<string>) => {
+      if (state.message){
+        state.message = ''
+      }
       state.pin += action.payload;
     },
 
     clearPin: (state) => {
-      state.pin = ''
+      state.pin = '';
+      state.message = ''
     },
 
     checkPin: (state) => {
-      if (state.pin === '1234'){
+      if (state.pin === "1234") {
         state.isAuthorized = true;
         state.message = "Access Granted";
-      }else {
+      } else {
         state.isAuthorized = false;
         state.message = "Access Denied";
+        state.pin = "";
       }
     }
 
