@@ -14,8 +14,30 @@ const calculatorSlice = createSlice({
   reducers: {
 
     addSymbol: (state, action: PayloadAction<string>) => {
-      state.expression += action.payload;
+      const value = action.payload;
+
+      const operators = ["+", "-", "*", "/"];
+
+      if (
+        state.expression === "" &&
+        operators.includes(value)
+      ) {
+        return;
+      }
+
+      const lastChar = state.expression.slice(-1);
+
+      if (
+        operators.includes(lastChar) &&
+        operators.includes(value)
+      ) {
+        return;
+      }
+
+      state.expression += value;
     },
+
+
 
     clearExpression: (state) => {
       state.expression = ''
@@ -23,11 +45,15 @@ const calculatorSlice = createSlice({
 
     calculateResult: (state) => {
       state.expression = String(eval(state.expression));
+    },
+
+    removeLastSymbol: (state) => {
+      state.expression = state.expression.slice(0, -1);
     }
 
   }
 })
 
-export const { addSymbol, clearExpression, calculateResult } = calculatorSlice.actions;
+export const { addSymbol, clearExpression, calculateResult, removeLastSymbol } = calculatorSlice.actions;
 
 export default calculatorSlice.reducer;

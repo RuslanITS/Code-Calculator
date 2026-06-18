@@ -41,6 +41,28 @@ const Password = () => {
     }
   };
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (/^[0-9]$/.test(event.key)) {
+        dispatch(addDigit(event.key));
+      }
+
+      if (event.key === "Backspace") {
+        dispatch(clearPin());
+      }
+
+      if (event.key === "Enter") {
+        dispatch(checkPin());
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [dispatch]);
+
   return (
     <Card
       className="shadow-lg border-0 mx-auto"
