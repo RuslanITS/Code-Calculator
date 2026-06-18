@@ -14,3 +14,24 @@ body,
 .content {
   flex: 1;
 }
+
+.app {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #1e293b,
+    #334155
+  );
+}
+
+.btn {
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.card {
+  backdrop-filter: blur(10px);
+}

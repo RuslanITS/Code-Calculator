@@ -22,6 +22,11 @@ const authSlice = createSlice({
         state.message = ''
       }
       state.pin += action.payload;
+
+      if (state.pin.length >= 4) {
+        return;
+      }
+
     },
 
     clearPin: (state) => {
@@ -38,10 +43,16 @@ const authSlice = createSlice({
         state.message = "Access Denied";
         state.pin = "";
       }
+    },
+
+    backPassPage: (state) => {
+      state.isAuthorized = false;
+      state.pin = "";
+      state.message = "";
     }
 
   }
 })
 
-export const { addDigit, clearPin, checkPin } = authSlice.actions;
+export const { addDigit, clearPin, checkPin, backPassPage } = authSlice.actions;
 export default authSlice.reducer;
