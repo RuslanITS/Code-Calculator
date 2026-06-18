@@ -30,16 +30,20 @@ const Password = () => {
 
       if (pin === "1234") {
         dispatch(checkPin());
-        toast.success("Access Granted");
       } else {
         dispatch(checkPin());
-        toast.error("Incorrect Password");
       }
 
     } else {
       dispatch(addDigit(value));
     }
   };
+
+  useEffect(() => {
+    if (message === "Access Denied") {
+      toast.error("Incorrect Password");
+    }
+  }, [message]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
